@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RWM Dinner QR Scanner</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qr-scanner/1.4.2/qr-scanner.umd.min.js"></script>
+</head>
+<body>
+    <h1>RWM Dinner QR Scanner</h1>
+    <video id="video"></video>
+    <div id="result"></div>
+
+    <script>
+        const video = document.getElementById('video');
+        const resultDiv = document.getElementById('result');
+
+        const qrScanner = new QrScanner(video, result => {
+            if (result.data.startsWith('RWMDinner-')) {
+                const attendeeId = result.data.split('-')[1];
+                // Here you would typically make an API call to get attendee details
+                // For this example, we'll just display the scanned data
+                resultDiv.innerHTML = `Valid QR Code: Attendee ID ${attendeeId}`;
+            } else {
+                resultDiv.innerHTML = 'Invalid QR Code';
+            }
+        });
+
+        qrScanner.start();
+    </script>
+</body>
+</html>
